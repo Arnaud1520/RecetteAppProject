@@ -5,19 +5,34 @@
 {% block body %}
 <style>
     /* Mise en forme générale */
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f8f9fa;
-        margin: 0;
-        padding: 0;
-        color: #333;
-    }
+   body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+
+    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
+        url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1650&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
 
     .container {
-        max-width: 1200px;
-        margin: 30px auto;
-        padding: 0 15px;
-    }
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+   
+
+
+
 
     h1 {
         font-size: 2.5rem;
@@ -56,7 +71,7 @@
     }
 
     .btn-info {
-        background-color: #3498db;
+       background-color: #2ecc71;
         color: white;
         border: none;
         padding: 8px 15px;
@@ -65,12 +80,35 @@
     }
 
     .btn-info:hover {
-        background-color: #2980b9;
+        background-color: #2ecc71;
     }
 
     .ms-2 {
         margin-left: 10px;
     }
+    .btn-all-recipes {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border: none;
+    padding: 8px 24px;       /* un peu moins large et haut */
+    font-size: 1rem;         /* un peu plus petit */
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 242, 254, 0.4);
+    transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    text-align: center;
+}
+
+.btn-all-recipes:hover {
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    box-shadow: 0 6px 16px rgba(0, 242, 254, 0.7);
+    transform: translateY(-2px);
+}
+
 
     .mb-3 {
         margin-bottom: 30px;
@@ -141,6 +179,7 @@
         padding: 8px 15px;
         border-radius: 5px;
     }
+    
 
     .card .btn-primary:hover {
         background-color: #2980b9;
@@ -175,18 +214,20 @@
         margin-bottom: 20px;
     }
 
-    .user-avatar img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 2px solid #ddd;
-    }
+   
+.user-avatar img {
+    width: 70px;   /* Agrandi de 50px à 70px */
+    height: 70px;  /* Agrandi de 50px à 70px */
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
 
-    .user-name {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #333;
-    }
+.user-name {
+    font-size: 1.5rem;  /* Agrandi de 1.2rem à 1.5rem */
+    font-weight: bold;
+    color: #333;
+}
+
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -195,6 +236,34 @@
             max-width: 100%;
         }
     }
+    .btn-outline-danger {
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+}
+
+.btn-outline-danger:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+.custom-btn {
+    background-color: #3498db; /* Bleu pour le bouton */
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 25px;
+    text-align: center;
+    display: block;
+    width: 100%;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #2980b9; /* Bleu foncé au survol */
+}
+
+
 </style>
 
 <div class="container">
@@ -209,14 +278,25 @@
     </div>
 
     <!-- Boutons en haut à droite -->
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{{ path('app_logout') }}" class="btn btn-danger">Se déconnecter</a>
-        <a href="{{ path('app_add_recipe') }}" class="btn btn-success ms-2">Ajouter une recette</a>
-    </div>
+<div class="d-flex justify-content-end mb-3" style="gap: 10px; flex-wrap: wrap;">
+    <a href="{{ path('app_user_profile') }}" class="btn btn-info">
+        <i class="fa fa-user"></i> Mon profil
+    </a>
+    <a href="{{ path('app_user_favorites') }}" class="btn btn-info">
+        <i class="fa fa-heart"></i> Mes favoris
+    </a>
+    <a href="{{ path('app_add_recipe') }}" class="btn btn-success">
+        <i class="fa fa-plus"></i> Ajouter une recette
+    </a>
+    <a href="{{ path('app_logout') }}" class="btn btn-danger">
+        <i class="fa fa-sign-out-alt"></i> Se déconnecter
+    </a>
+</div>
+
 
     <!-- Bouton pour afficher toutes les recettes -->
     <div class="mb-3">
-        <a href="{{ path('app_all_recipes') }}" class="btn btn-primary">Afficher toutes les recettes</a>
+        <a href="{{ path('app_all_recipes') }}" class="btn btn-all-recipes">Afficher toutes les recettes</a>
     </div>
 
     <!-- Section pour les catégories de recettes -->
@@ -229,6 +309,8 @@
                     <a href="{{ path('recipe_view', {'id': recipe.id}) }}" class="btn btn-info">
                         <i class="fa fa-eye"></i> Voir
                     </a>
+                  
+
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.name }}</h5>
                         <p class="card-author">Auteur: {{ recipe.author.name }}</p>
@@ -236,6 +318,11 @@
                         <a href="{{ path('recipe_edit', {'id': recipe.id}) }}" class="btn btn-primary">
                             <i class="fa fa-edit"></i> Modifier
                         </a>
+                      <a href="{{ path('app_add_favorite', {'id': recipe.id}) }}" class="btn btn-outline-danger btn-sm" style="font-size: 1.2rem; padding: 5px 10px; min-width: 30px; text-align: center;">
+                                 <i class="fa fa-heart"></i>
+                    </a>
+
+
                         <a href="{{ path('recipe_delete', {'id': recipe.id}) }}" class="btn btn-danger ms-2">
                             <i class="fa fa-trash"></i> Supprimer
                         </a>
@@ -250,50 +337,60 @@
             <div class="col-md-4 mb-4">
                 <h2>Plats</h2>
                 {% for recipe in plats %}
-                    <div class="card">
-                        <a href="{{ path('recipe_view', {'id': recipe.id}) }}" class="btn btn-info">
-                            <i class="fa fa-eye"></i> Voir
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ recipe.name }}</h5>
-                            <p class="card-author">Auteur: {{ recipe.author.name }}</p>
-                            <p class="card-text">{{ recipe.description }}</p>
-                            <a href="{{ path('recipe_edit', {'id': recipe.id}) }}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> Modifier
-                            </a>
-                            <a href="{{ path('recipe_delete', {'id': recipe.id}) }}" class="btn btn-danger ms-2">
-                                <i class="fa fa-trash"></i> Supprimer
-                            </a>
-                        </div>
-                    </div>
-                {% else %}
-                    <p>Aucun plat disponible.</p>
-                {% endfor %}
+    <div class="card">
+        <a href="{{ path('recipe_view', {'id': recipe.id}) }}" class="btn btn-info btn-sm" style="position: absolute; top: 10px; right: 10px;">
+            <i class="fa fa-eye"></i> Voir
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-author">Auteur: {{ recipe.author.name }}</p>
+            <p class="card-text">{{ recipe.description }}</p>
+
+            <div class="d-flex flex-wrap mt-2" style="gap: 6px;">
+                <a href="{{ path('recipe_edit', {'id': recipe.id}) }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-edit"></i> Modifier
+                </a>
+                <a href="{{ path('app_add_favorite', {'id': recipe.id}) }}" class="btn btn-outline-danger btn-sm" style="font-size: 1.2rem; padding: 5px 10px; min-width: 30px; text-align: center;">
+                                 <i class="fa fa-heart"></i>
+                    </a>
+                <a href="{{ path('recipe_delete', {'id': recipe.id}) }}" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash"></i> Supprimer
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+                
             </div>
 
             <!-- Desserts -->
             <div class="col-md-4 mb-4">
                 <h2>Desserts</h2>
                 {% for recipe in desserts %}
-                    <div class="card">
-                        <a href="{{ path('recipe_view', {'id': recipe.id}) }}" class="btn btn-info">
-                            <i class="fa fa-eye"></i> Voir
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ recipe.name }}</h5>
-                            <p class="card-author">Auteur: {{ recipe.author.name }}</p>
-                            <p class="card-text">{{ recipe.description }}</p>
-                            <a href="{{ path('recipe_edit', {'id': recipe.id}) }}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> Modifier
-                            </a>
-                            <a href="{{ path('recipe_delete', {'id': recipe.id}) }}" class="btn btn-danger ms-2">
-                                <i class="fa fa-trash"></i> Supprimer
-                            </a>
-                        </div>
-                    </div>
-                {% else %}
-                    <p>Aucun dessert disponible.</p>
-                {% endfor %}
+                   <div class="card">
+        <a href="{{ path('recipe_view', {'id': recipe.id}) }}" class="btn btn-info btn-sm" style="position: absolute; top: 10px; right: 10px;">
+            <i class="fa fa-eye"></i> Voir
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-author">Auteur: {{ recipe.author.name }}</p>
+            <p class="card-text">{{ recipe.description }}</p>
+
+            <div class="d-flex flex-wrap mt-2" style="gap: 6px;">
+                <a href="{{ path('recipe_edit', {'id': recipe.id}) }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-edit"></i> Modifier
+                </a>
+                <a href="{{ path('app_add_favorite', {'id': recipe.id}) }}" class="btn btn-outline-danger btn-sm" style="font-size: 1.2rem; padding: 5px 10px; min-width: 30px; text-align: center;">
+                                 <i class="fa fa-heart"></i>
+                    </a>
+                <a href="{{ path('recipe_delete', {'id': recipe.id}) }}" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash"></i> Supprimer
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
             </div>
         </div>
     </div>
